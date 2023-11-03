@@ -9,13 +9,8 @@ import streamlit as st
 import altair as alt
 from pymongo import MongoClient
 
-#Establish connection URI with secret.toml values
-@st.experimental_singleton(suppress_st_warning=True)
-def init_connection():
-    return MongoClient("mongodb+srv://st.secrets.username:st.secrets.password@st.secrets.cluster.ycr5yln.mongodb.net/?retryWrites=true&w=majority")
-
-#Connect to DB
-conn = init_connection()
+#Connect to MongoDB
+conn = MongoClient("mongodb+srv://st.secrets.username:st.secrets.password@st.secrets.cluster.ycr5yln.mongodb.net/?retryWrites=true&w=majority")
 #Connect to database in cluster
 db = conn["letterboxd"]
 
