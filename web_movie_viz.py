@@ -10,7 +10,8 @@ import altair as alt
 from pymongo import MongoClient
 
 #Connect to MongoDB
-conn = MongoClient("mongodb+srv://st.secrets.username:st.secrets.password@st.secrets.cluster.ycr5yln.mongodb.net/?retryWrites=true&w=majority")
+mongo_uri = "mongodb+srv://%s:%s@%s.ycr5yln.mongodb.net/?retryWrites=true&w=majority" % (st.secrets.username,st.secrets.password,st.secrets.cluster)
+conn = MongoClient(mongo_uri)
 #Connect to database in cluster
 db = conn["letterboxd"]
 
