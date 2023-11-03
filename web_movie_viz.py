@@ -1,4 +1,4 @@
-# To Run: streamlit run web_movie_viz.py
+# To run locally: streamlit run web_movie_viz.py
 # Change to dark mode by going to Settings and selecting "Dark" from Choose app theme, colors and fonts
 
 #Load Requisite Libraries
@@ -7,13 +7,42 @@ import numpy as np
 from datetime import datetime
 import streamlit as st
 import altair as alt
+from pymongo import MongoClient
 
-#Load Data (Replace with the data generated from the Letterboxd API code)
-df = pd.read_csv(r'https://raw.githubusercontent.com/amotter443/movies-streamlit/main/movie_data_final.csv')
-cast = pd.read_csv(r'https://raw.githubusercontent.com/amotter443/movies-streamlit/main/cast_stats.csv')
-crew = pd.read_csv(r'https://raw.githubusercontent.com/amotter443/movies-streamlit/main/crew_stats.csv')
-cast_trended = pd.read_csv(r'https://raw.githubusercontent.com/amotter443/movies-streamlit/main/cast_trended_stats.csv')
-crew_trended = pd.read_csv(r'https://raw.githubusercontent.com/amotter443/movies-streamlit/main/crew_trended_stats.csv')
+#Establish connection URI with secret.toml values
+@st.experimental_singleton(suppress_st_warning=True)
+def init_connection():
+    return MongoClient("mongodb+srv://st.secrets.db_username:st.secrets.db_pswd@st.secrets.cluster_name.ycr5yln.mongodb.net/?retryWrites=true&w=majority")
+
+#Connect to DB
+conn = init_connection()
+#Connect to database in cluster
+db = conn["letterboxd"]
+
+#Connect to df, drop mongodb ID column
+collection = db.get_collection("master_df")
+df = pd.DataFrame(list(collection.find()))
+df.drop('_id', axis=1, inplace=True)
+
+#Connect to cast, drop mongodb ID column
+collection = db.get_collection("cast")
+cast = pd.DataFrame(list(collection.find()))
+cast.drop('_id', axis=1, inplace=True)
+
+#Connect to crew, drop mongodb ID column
+collection = db.get_collection("crew")
+crew = pd.DataFrame(list(collection.find()))
+crew.drop('_id', axis=1, inplace=True)
+
+#Connect to cast_trended, drop mongodb ID column
+collection = db.get_collection("cast_trended")
+cast_trended = pd.DataFrame(list(collection.find()))
+cast_trended.drop('_id', axis=1, inplace=True)
+
+#Connect to crew_trended, drop mongodb ID column
+collection = db.get_collection("crew_trended")
+crew_trended = pd.DataFrame(list(collection.find()))
+crew_trended.drop('_id', axis=1, inplace=True)
 
 #Create 'normal' view that doesn't included bulk logged entries, in this case from 2017 
 normal = df[(df["Logged_Year"]>2017) & (df["Logged_Year"]<2023)]
