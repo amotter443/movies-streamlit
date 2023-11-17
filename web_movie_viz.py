@@ -41,7 +41,7 @@ crew_trended = pd.DataFrame(list(collection.find()))
 crew_trended.drop('_id', axis=1, inplace=True)
 
 #Create 'normal' view that doesn't included bulk logged entries, in this case from 2017 
-normal = df[(df["Logged_Year"]>2017) & (df["Logged_Year"]<2023)]
+normal = df[df["Logged_Year"]>2017]
 normal['Enjoyed'] = np.where(normal['Rating']>=4,"Yes","No")
 
 #To Do: Change name to your name
