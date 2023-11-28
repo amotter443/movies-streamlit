@@ -242,7 +242,9 @@ fig_data = fig_data.merge(cast_trended, on=['Logged_Year','gender','order','disp
 fig_data = fig_data[['Logged_Year','name']]
 fig_data.columns = ['Year','Name']
 fig_data = fig_data.sort_values('Year',ascending=False)
-st.table(fig_data)
+#To display year without commas
+fig_data['Year'] = fig_data['Year'].astype(str)
+st.dataframe(fig_data,hide_index=True)
 
 
 #Trend most seen directors by year
@@ -254,4 +256,6 @@ fig_data = fig_data.merge(crew_trended, on=['Logged_Year','job','order','display
 fig_data = fig_data[['Logged_Year','name']]
 fig_data.columns = ['Year','Name']
 fig_data = fig_data.sort_values('Year',ascending=False)
-st.table(fig_data)
+#To display year without commas
+fig_data['Year'] = fig_data['Year'].astype(str)
+st.dataframe(fig_data,hide_index=True)
