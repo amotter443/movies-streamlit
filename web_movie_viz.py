@@ -44,6 +44,8 @@ crew_trended.drop('_id', axis=1, inplace=True)
 normal = df[df["Logged_Year"]>2017]
 normal['Enjoyed'] = np.where(normal['Rating']>=4,"Yes","No")
 
+st.set_page_config(page_title='Letterboxd Data Analysis', page_icon='lb.png', initial_sidebar_state="auto", menu_items=None)
+
 #To Do: Change name to your name
 st.title("Alex Motter's Adventures in Moviegoing")
 st.markdown("""---""")
