@@ -259,3 +259,8 @@ fig_data = fig_data.sort_values('Year',ascending=False)
 #To display year without commas
 fig_data['Year'] = fig_data['Year'].astype(str)
 st.dataframe(fig_data,hide_index=True)
+
+
+st.text("")
+st.text("")
+st.image('thats_all_folks.jpg')
