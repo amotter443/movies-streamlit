@@ -162,9 +162,13 @@ def calculate_decade(year):
 
 # Create the "Decade" column
 df['Decade'] = df['Year'].apply(calculate_decade)
+df['Decade'] = df['Decade'].round().astype(str)
+df['Decade'] = df['Decade'].str.rstrip('0').str.rstrip('.')
 fig_data = df[df['Rating']>0]
 fig_data = fig_data.groupby(['Decade']).agg({'Rating':'mean'})
 fig_data['Rating'] = round(fig_data['Rating'],2)
+fig_data['Rating'] = fig_data['Rating'].astype(str)
+fig_data['Rating'] = fig_data['Rating'].str.rstrip('0').str.rstrip('.')
 st.table(fig_data)
 st.text("")
 st.text("")
