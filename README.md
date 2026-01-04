@@ -11,7 +11,7 @@ Project Execution Steps
 - Complete all the required steps/code execution in [previous movie repo](https://github.com/amotter443/movies)
 - Register for a free MongoDB Atlas account
 - Create a MongoDB cluster and a 'letterboxd' database
-- In the Network Access section of MongoDB, allow 0.0.0 for credential-based web access
+- In the Network Access section of MongoDB, allow [Streamlit Community Cloud IP Addresses](https://docs.streamlit.io/deploy/streamlit-community-cloud/status#ip-addresses) to avoid allowing 0.0.0.0 cluster access
 - Execute the `mongodb_create.py` to write user data to MongoDB via PyMongo
 - Modify and configure `web_movie_viz.py` (Change the title to your name, add in any date modifications based on when you joined Letterboxd, etc.)
 - Embed username, pwd, and cluster name to secrets.toml file in Streamlit
@@ -21,5 +21,6 @@ Project Execution Steps
 Helpful Resources
 --------
 - [Setting up a MongoDB Cluster/Database](https://www.mongodb.com/basics/create-database)
-- [PyMongo Starter Guide](https://www.w3schools.com/python/python_mongodb_getstarted.asp) 
+- [PyMongo Starter Guide](https://www.w3schools.com/python/python_mongodb_getstarted.asp)
+- [Streamlit Community Cloud IP Addresses](https://docs.streamlit.io/deploy/streamlit-community-cloud/status#ip-addresses)
 - [Streamlit MongoDB Integration ](https://docs.streamlit.io/knowledge-base/tutorials/databases/mongodb)
